@@ -1,20 +1,23 @@
-import "@babel/polyfill"
+import "babel-polyfill"
 
 import React from 'react'
 import ReactDOM from 'react-dom'
 
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
-import { AppContainer } from 'react-hot-loader'
+import { AppContainer } from 'react-hot-loader' // eslint-disable-line
+import { HelmetProvider } from 'react-helmet-async'
 
-import App from './views/App'
+import App from './main'
 import configureStore from './store/store'
 
-const store = configureStore()
+const initialState = window.__INITIAL__STATE__ || {}
+
+const store = configureStore(initialState, 'client')
 
 const root = document.getElementById('root')
 const render = (Component) => {
-    ReactDOM.render(
+    ReactDOM.hydrate(
         <AppContainer>
             <Provider store={store}>
                 <BrowserRouter>
@@ -39,7 +42,7 @@ if (module.hot) {
     })
 
     module.hot.accept('./views/App', () => {
-        const NextApp = require('./views/App').default
+        const NextApp = require('./views/App').default // eslint-disable-line
         render(NextApp)
     })
 }
