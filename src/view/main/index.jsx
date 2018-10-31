@@ -1,12 +1,19 @@
 import React from 'react'
+import _ from 'lodash'
+
+import Chil from "./children"
 
 import { test1 } from "@/util"
 
 export default class App extends React.Component {
     render() {
-        // test1()
+        const count = _.add(4,6)
+        console.error("i am good person")
         return(
-            <div>hello!6888866</div>
+            <div>
+                <div>{count}</div>
+                <Chil />
+            </div>
         )
     }
 }

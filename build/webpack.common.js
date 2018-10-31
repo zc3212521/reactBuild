@@ -1,11 +1,10 @@
 const path = require("path")
-const HTMLPlugin = require("html-webpack-plugin")
+const webpack = require("webpack")
 
 module.exports = {
     output: {
         path: path.resolve(__dirname, "../dist"),
-        filename: "[name].[hash].js",
-        publicPath: '/public/'
+        filename: "[name]_[hash].js",
     },
     resolve: {
         alias: {
@@ -17,20 +16,15 @@ module.exports = {
         rules: [
             {
                 test: /.jsx$/,
-                loader: 'babel-loader'
+                loader: 'babel-loader?cacheDirectory=true'
             },
             {
                 test: /.js$/,
-                loader: 'babel-loader',
+                loader: 'babel-loader?cacheDirectory=true',
                 exclude: [
                     path.join(__dirname, '../node_modules')
                 ]
             },
         ]
     },
-    plugins: [
-        new HTMLPlugin({
-            template: path.resolve(__dirname, "../src/index.html")
-        }),
-    ]
 }

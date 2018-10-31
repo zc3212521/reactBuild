@@ -1,6 +1,7 @@
 const path = require("path")
 const webpack = require("webpack")
 const merge = require("webpack-merge")
+const HTMLPlugin = require("html-webpack-plugin")
 
 const commonConfig = require("./webpack.common")
 
@@ -10,6 +11,9 @@ module.exports = merge(commonConfig, {
         'react-hot-loader/patch',
         path.resolve(__dirname, "../src/app.js")
     ],
+    output: {
+        publicPath: '/public/'
+    },
     devtool: 'inline-source-map',
     devServer: {
         // open: true,
@@ -32,6 +36,9 @@ module.exports = merge(commonConfig, {
     },
 
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new HTMLPlugin({
+            template: path.resolve(__dirname, "../src/index.dev.html")
+        }),
     ]
 })

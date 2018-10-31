@@ -6,8 +6,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "rimraf dist && webpack-dev-server --config build/webpack.dev.js",
-    "build": "rimraf dist && webpack --config build/webpack.prod.js"
+    "dev": "webpack-dev-server --config build/webpack.dev.js",
+    "build": "rimraf dist && npm run dll && webpack --config build/webpack.prod.js",
+    "dll": "webpack --config build/webpack.dll.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
   "homepage": "https://github.com/zc3212521/reactBuild#readme",
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
+    "lodash": "^4.17.11",
     "react": "^16.5.2",
     "react-dom": "^16.5.2"
   },
